@@ -1,0 +1,3 @@
+int loopback 10
+ip add 10.10.10.10 255.255.255.255
+no shut
