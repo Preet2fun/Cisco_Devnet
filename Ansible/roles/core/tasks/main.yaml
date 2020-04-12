@@ -1,0 +1,9 @@
+---
+- name: "Task 1 : Backup current switch config (ios)"
+  ios_config:
+     backup: yes
+
+  register: backup_ios_location
+  when: ansible_network_os == 'ios'
+
+

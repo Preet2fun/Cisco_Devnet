@@ -1,0 +1,19 @@
+---
+- name: Network facts
+  gather_facts: false
+  hosts: ios
+  tasks:
+      - name: "Task 1 : gathering facts using ios_facts module"
+        ios_facts:
+        when: ansible_network_os == 'ios'
+   
+
+      - name: "Task 2 : display certain facts"
+        debug:
+          msg: "The host name is {{ansible_net_hostname}} running on {{ansible_net_version}}"
+
+
+      - name: "Task 3 : display all variables gether from task 1"
+        debug:
+          var: hostvars['172.16.9.215']
+

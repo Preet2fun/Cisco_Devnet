@@ -1,0 +1,8 @@
+---
+- name: playbook for ios and role
+  hosts: ios
+  gather_facts: false
+
+  roles:
+   - ios
+   - core

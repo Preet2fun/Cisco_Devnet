@@ -1,0 +1,13 @@
+[ios]
+172.16.9.215
+172.16.9.216
+
+
+[servers]
+172.16.8.49
+
+[core]
+172.16.9.215
+
+[NXOS]
+sbx-nxos-mgmt.cisco.com

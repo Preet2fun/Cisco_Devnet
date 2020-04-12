@@ -1,0 +1,14 @@
+---
+- name: "Demonstrate connecting to switches"
+  hosts: NXOS
+  connection: local
+
+  tasks:
+    - name: "Retriving nexus os facts"
+      nxos_facts:
+        host: "{{inventory_hostname}}"
+        transport: nxapi
+      register: nxos_info
+
+    - name: display nxos info
+      debug: msg={{nxos_info}}

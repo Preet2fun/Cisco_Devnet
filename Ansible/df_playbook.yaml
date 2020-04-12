@@ -1,0 +1,8 @@
+---
+ - name : "disk information gethering"
+   hosts : servers
+   
+   tasks:
+     - name: "check disk usage"
+       shell: df -h > df_temp.txt
+    

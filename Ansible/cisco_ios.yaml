@@ -1,0 +1,24 @@
+---
+- name: Backupo data
+  hosts: ios
+  tasks:
+      - name: "Task 1 : Backup current switch config (ios)"
+        ios_config:
+         backup: yes
+   
+        register: backup_ios_location
+        when: ansible_network_os == 'ios'
+
+      - name: "Task 2 : Run ios command and capture output"
+        ios_command:
+          commands:
+             - show run | i hostname
+        register: output
+
+
+      - name: "Task 3 : checking when condition"
+        when: '"router15" in "{{output.stdout}}"'
+        ios_config:
+          lines:
+            - logging buffered 30000
+

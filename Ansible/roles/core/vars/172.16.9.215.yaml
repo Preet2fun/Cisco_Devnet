@@ -1,0 +1,3 @@
+ansible_user: router15
+ansible_password: router15
+ansible_become_password: router15

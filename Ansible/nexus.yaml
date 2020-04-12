@@ -1,0 +1,14 @@
+---
+- name: Configure nexus loopback interface
+  hosts: NXOS
+  connection: local
+  
+  tasks:
+    - name: creating loopback interface
+      with_items: "{{local_loopbacks}}"
+      nxos_interface:
+        host: "{{inventory_hostname}}"
+        interface: "{{item.name}}"
+        mode: layer3
+        discription: "{{item.desc}}"
+        admin_state: up

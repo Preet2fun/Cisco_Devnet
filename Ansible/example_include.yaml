@@ -1,0 +1,9 @@
+---
+- name: show users
+  hosts: servers
+  
+  tasks:
+   - name: show local users
+     command: who
+     register: output
+   - include: output.yaml

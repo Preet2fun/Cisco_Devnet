@@ -1,0 +1,27 @@
+---
+ - name: configure SNMP contact
+   hosts: "sbx-nxos-mgmt.cisco.com"
+   gather_facts: false
+   connection: local
+   
+
+   vars:
+    cli:
+      host: "{{inventory_hostname}}"
+      username: admin
+      password: Admin_1234!
+      port: 8181
+      transport: cli
+    
+   tasks:
+      - name: "configure SNMP contact"
+        nxos_snmp_contact:
+           contact: TEST_1
+           state: present
+           provider: "{{cli}}"
+        register: output
+
+      - name: "show output"
+        debug: 
+          var: output
+

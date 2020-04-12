@@ -1,0 +1,7 @@
+---
+- name: 
+  hosts: ios
+  tasks:
+    - template:
+        src: test_template.j2
+        dest: "./{{ inventory_hostname }}.txt"

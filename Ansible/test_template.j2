@@ -1,0 +1,9 @@
+{% if ansible_network_os == "ios" %}
+  ip name-server {{ name_server1 }}  
+  ip name-server {{ name_server2 }}  
+{% elif ansible_network_os == "eos" %}
+  ip name-server vrf default {{ name_server1 }}  
+  ip name-server vrf default {{ name_server2 }}  
+{% elif ansible_network_os == "nxos" %}
+  ip name-server {{ name_server1 }} {{ name_server2 }}  
+{% endif %}

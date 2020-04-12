@@ -1,0 +1,38 @@
+---
+- name: "example of variable file and loop"
+  hosts: ios
+  gather_facts: false
+
+  vars:
+   vlans:
+      - vlan_id: 100
+        name: DATA
+      - vlan_id: 200
+        name: VOICE
+      - vlan_id: 300
+        name: VIDEO
+
+  tasks: 
+   - name: Configure VLAN ID
+     ios_config:
+        lines:
+          - vlan {{ item.vlan_id }}
+     with_items: "{{vlans}}"
+
+   #- name: Configure VLAN description
+   #  ios_config:
+   #    lines:
+   #       - name {{ item.name }}
+   #    parents: vlan {{ item.vlan_id }}
+   #  with_items: "{{vlans}}"
+
+
+   - name: Show VLAN
+     ios_command:
+        commands: show vlan brief
+     register: show_vlan
+
+   - debug: var=show_vlan.stdout_lines
+        
+      
+
