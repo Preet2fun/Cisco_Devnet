@@ -1,0 +1,21 @@
+
+---
+# Just defining one pool to keep it simple. CLI equivalent:
+# # ip dhcp pool GLOBOMANTICS_VLAN20
+# #  network 198.51.100.0 255.255.255.0
+# #  default-router 198.51.100.254
+# #  dns-server 8.8.8.8 8.8.4.4
+# #  domain-name globomantics.com
+add_pools:
+   - id: "GLOBOMANTICS_VLAN130"
+     default-router:
+       default-router-list: ["197.51.100.254"]
+     dns-server:
+       dns-server-list: ["8.8.4.4", "8.8.8.8"]
+     domain-name: "test130.com"
+     network:
+       primary-network:
+         number: "197.51.100.0"
+         mask: "255.255.255.0"
+...
+

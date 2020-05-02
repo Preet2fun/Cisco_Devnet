@@ -1,0 +1,54 @@
+import requests
+import pprint
+import json 
+
+def main():
+    
+    # The IOS-XE sandbox uses a self-signed cert at present, so let's
+    # ignore any obvious security warnings for now.
+    requests.packages.urllib3.disable_warnings()
+
+    # The API path below is what the sandbox uses for API testing,
+    api_path = "https://ios-xe-mgmt-latest.cisco.com:9443/restconf"
+
+    # Create 2-tuple for "basic" authentication using Cisco credentials.
+    auth = ('root', 'D_Vay!_10&')
+    
+    # Define headers for issuing HTTP GET requests to receive YANG data as JSON.
+    headers = {"Accept": "application/yang-data+json"}
+     
+    # Issue a GET request to collect the DHCP pool information only. This will
+    get_pool_respo = requests.get(
+                     f"{api_path}/data/Cisco-IOS-XE-native:native/ip/dhcp/pool",
+                     headers=headers,
+                     auth=auth,
+                     verify=False,
+                     )
+
+
+    #print(get_pool_respo)
+    #print(get_pool_respo.text)
+    #print(json.dumps(get_pool_respo.json(), indent=2))
+
+    if get_pool_respo.status_code == 200 and get_pool_respo.text:
+        pools = get_pool_respo.json()["Cisco-IOS-XE-dhcp:pool"]
+        print(pools)
+        for pool in pools:
+            print (pool["id"])
+            print (pool["default-router"]["default-router-list"])
+            print (f"DNS Server : {pool["dns-server"]}"):
+               for dns in pool["dns-server"]["dns-server-list"]
+                   print(f"server_IP: dns{}")         
+ 
+                     
+
+
+
+
+
+
+
+
+if __name__=='__main__':
+  main()
+
